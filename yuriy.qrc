@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="/">
+    <file>images/grid.png</file>
+    <file>images/hand.png</file>
+    <file>images/magnifier.png</file>
+    <file>images/move.png</file>
+    <file>images/params.png</file>
+    <file>images/play.png</file>
+    <file>images/reset.png</file>
+    <file>images/rotate.png</file>
+    <file>images/rotate1.png</file>
+    <file>images/scale.png</file>
+    <file>images/shape.png</file>
+    <file>images/stop.png</file>
+  </qresource>
+</RCC>
