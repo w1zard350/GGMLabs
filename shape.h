@@ -38,6 +38,11 @@ protected:
     QPen pen;
 
     /**
+     * @var Перо для характеристических многоугольников
+     */
+    QPen penCharPolygon;
+
+    /**
      * @var Списки точек для первой и второй фигуры
      */
     QList<QPointF> shape1Points;
@@ -101,6 +106,7 @@ public:
     void setPen(QPen value);
     void setT(qreal value);
     void setCharPolygon(bool value);
+    void setPenCharPolygon(QPen value);
 
     //--------------------------------------------------------------------------------//
     /**
@@ -109,6 +115,7 @@ public:
     QPen getPen() const;
     qreal getT() const;
     bool getCharPolygon() const;
+    QPen getPenCharPolygon() const;
 };
 
 #endif // SHAPE_H

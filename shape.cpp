@@ -23,6 +23,7 @@
 #include "AGF/agfgraphicsview.h"
 Shape::Shape(AGFGraphicsItem* parent): AGFGraphicsItem(parent) {
     setPen(QPen(Qt::red, 2));
+    setPenCharPolygon(QPen(Qt::green, 1));
     lastPointNumber = -1;
     setFlag(ItemIsMovable, false);
     setT(0);
@@ -132,7 +133,6 @@ void Shape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWi
 
     painter->setPen(pen);
     painter->drawPath(path);
-    painter->setPen(QPen(Qt::green, 1));
 }
 
 void Shape::drawCharPolygon(QPainter* painter) {
@@ -147,13 +147,14 @@ void Shape::drawCharPolygon(QPainter* painter) {
             painter->drawEllipse(point, 5, 5);
             path.lineTo(point);
         }
+        painter->setPen(penCharPolygon);
         painter->drawPath(path);
     }
 }
 
 void Shape::transform() {
     t+=0.1;
-    qDebug() << t;
+//    qDebug() << t;
     QPointF point;
     qreal x1 = 0, x2 = 0, y1 = 0, y2 = 0, x = 0, y = 0;
     for(int i = 0; i < shape1Points.size(); i++) {
@@ -221,6 +222,9 @@ void Shape::setT(qreal value) {
 void Shape::setCharPolygon(bool value) {
     characteristicPolygon = value;
 }
+void Shape::setPenCharPolygon(QPen value) {
+    penCharPolygon = value;
+}
 //--------------------------------------------------------------------------------//
 /**
  * Методы-аксессоры get для полей
@@ -233,4 +237,7 @@ qreal Shape::getT() const {
 }
 bool Shape::getCharPolygon() const {
     return characteristicPolygon;
+}
+QPen Shape::getPenCharPolygon() const {
+    return penCharPolygon;
 }

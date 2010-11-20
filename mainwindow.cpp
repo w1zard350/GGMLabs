@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent), ui(new Ui::MainWin
     ui->graphicsView->addItem(grid);
 
     shape = new Shape();
+    shape->setPenCharPolygon(QPen(Qt::yellow, 1));
     ui->graphicsView->addItem(shape);
 
     setSpeed(ui->speed->value());
