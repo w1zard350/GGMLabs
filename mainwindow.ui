@@ -26,28 +26,106 @@
      </widget>
     </item>
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QGroupBox" name="groupBox">
       <property name="minimumSize">
        <size>
-        <width>300</width>
+        <width>200</width>
         <height>0</height>
        </size>
       </property>
-      <property name="maximumSize">
-       <size>
-        <width>300</width>
-        <height>16777215</height>
-       </size>
+      <property name="title">
+       <string/>
       </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Tab 2</string>
-       </attribute>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>181</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="transformLbl">
+            <property name="text">
+             <string>Превращение</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="play">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="yuriy.qrc">
+                <normaloff>:/images/play.png</normaloff>:/images/play.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="stop">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="yuriy.qrc">
+                <normaloff>:/images/stop.png</normaloff>:/images/stop.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="reset">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="yuriy.qrc">
+                <normaloff>:/images/reset.png</normaloff>:/images/reset.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="speedLbl">
+            <property name="text">
+             <string>Скорость</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="speed">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="characteristics">
+          <property name="text">
+           <string>Хар-е многоугольники</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -81,6 +159,8 @@
    <header>AGF/agfgraphicsview.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="yuriy.qrc"/>
+ </resources>
  <connections/>
 </ui>

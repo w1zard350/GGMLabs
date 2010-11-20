@@ -108,6 +108,7 @@ public slots:
 
     void setMx(double value);
     void setMy(double value);
+    void setMg(double value);
 
     void setAlphaDegree(double value);
     void setBetaDegree(double value);
@@ -132,7 +133,7 @@ public slots:
     void setProjectiveX0(double value);
     void setProjectiveY0(double value);
 
-    void setProjectiveW0(double value);
+    void setProjectiveW0(int value);
     void setProjectiveWx(double value);
     void setProjectiveWy(double value);
 

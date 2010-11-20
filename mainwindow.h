@@ -19,7 +19,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+class QBasicTimer;
 namespace Ui {
     class MainWindow;
 }
@@ -37,14 +37,37 @@ public:
      * @var Объект сетки (грида)
      */
     AGFGrid* grid;
+
     /**
      * @var Объект фигуры по варианту
      */
     Shape* shape;
 
+    /**
+     * @var Таймер для анимации
+     */
+    QBasicTimer* timer;
+
+    /**
+     * @var Скорость анимации (обновление таймера)
+     */
+    int speed;
+
     explicit MainWindow(QWidget *parent = 0);
-    void resizeEvent(QResizeEvent* event);
     ~MainWindow();
+
+    /**
+     * @var События
+     */
+    void resizeEvent(QResizeEvent* event);
+    void timerEvent(QTimerEvent *event);
+
+private slots:
+    void play();
+    void stop();
+    void reset();
+    void setSpeed(int value);
+    void setCharacteristics(bool value);
 
 private:
     Ui::MainWindow *ui;

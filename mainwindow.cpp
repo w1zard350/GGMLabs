@@ -20,21 +20,73 @@
 #include "AGF/items/agfgrid.h"
 #include "AGF/transformations/agfaffine.h"
 #include "shape.h"
+#include <QBasicTimer>
 
-MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget* parent): QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     ui->graphicsView->setAffineEnabled(true);
-    ui->graphicsView->getAffine()->setMx(20);
-    ui->graphicsView->getAffine()->setMy(20);
+    ui->graphicsView->getAffine()->setMg(10);
+    ui->graphicsView->setCenterX(-300);
+    ui->graphicsView->setCenterY(-300);
+
+    // таймер
+    timer = new QBasicTimer();
 
     // конфигурируем сетку
     grid = new AGFGrid();
     grid->setCellSize(1);
+    grid->setQuarterVisible(2, false);
+    grid->setQuarterVisible(3, false);
+    grid->setQuarterVisible(4, false);
+    grid->setCellNumX(50);
+    grid->setCellNumY(60);
     ui->graphicsView->addItem(grid);
 
     shape = new Shape();
     ui->graphicsView->addItem(shape);
+
+    setSpeed(ui->speed->value());
+
+    // анимация
+    connect(ui->play, SIGNAL(clicked()), this, SLOT(play()));
+    connect(ui->stop, SIGNAL(clicked()), this, SLOT(stop()));
+    connect(ui->reset, SIGNAL(clicked()), this, SLOT(reset()));
+
+    // скорость
+    connect(ui->speed, SIGNAL(valueChanged(int)), this, SLOT(setSpeed(int)));
+
+    // характеристические многоугольники
+    connect(ui->characteristics, SIGNAL(clicked(bool)), this, SLOT(setCharacteristics(bool)));
+
+}
+
+void MainWindow::setCharacteristics(bool value) {
+    shape->setCharPolygon(value);
+    ui->graphicsView->scene()->update();
+}
+
+void MainWindow::timerEvent(QTimerEvent* event) {
+    Q_UNUSED(event);
+    if(shape->getT() < 1) shape->transform();
+    else timer->stop();
+}
+
+void MainWindow::play() {
+    timer->start(speed, this);
+}
+
+void MainWindow::stop() {
+    timer->stop();
+}
+
+void MainWindow::reset() {
+    shape->setUp();
+    ui->graphicsView->scene()->update();
+}
+
+void MainWindow::setSpeed(int value) {
+    speed = value;
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -45,4 +97,5 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
 MainWindow::~MainWindow() {
     delete ui;
     delete grid;
+    delete shape;
 }

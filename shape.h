@@ -30,14 +30,34 @@ QT_END_NAMESPACE
  */
 class Shape: public AGFGraphicsItem
 {
+
 protected:
     /**
      * @var Перо для фигуры
      */
     QPen pen;
-    QList<QPointF> pointsBezier;
-    QPointF lastPos;
+
+    /**
+     * @var Списки точек для первой и второй фигуры
+     */
+    QList<QPointF> shape1Points;
+    QList<QPointF> shape2Points;
+
+    /**
+     * @var Последний индекс точки, которая была активирована перемещением
+     */
     int lastPointNumber;
+
+    /**
+     * @var Время перехода одной фигуры в другую
+     */
+    qreal t;
+
+    /**
+     * @var Состояние включенности характеристического многоугольника
+     */
+    bool characteristicPolygon;
+
 public:
     Shape(AGFGraphicsItem* parent = 0);
 
@@ -46,25 +66,49 @@ public:
      * Событие полной перерисовки объекта
      */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
     /**
      * Определяет прямоугольник, в котором производиться рисование
      */
     QRectF boundingRect() const;
 
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    /**
+     * События
+     */
+    void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+
+    /**
+     * Пересчет всех точек фигур
+     */
     void setUp();
+
+    /**
+     * Переход одной фигуры в другую на единицу времени
+     */
+    void transform();
+
+    /**
+     * Прорисовка характиристических многоугольников\
+     */
+    void drawCharPolygon(QPainter* painter);
+
     //--------------------------------------------------------------------------------//
     /**
      * Методы-аксессоры set
      */
     void setPen(QPen value);
+    void setT(qreal value);
+    void setCharPolygon(bool value);
+
     //--------------------------------------------------------------------------------//
     /**
      * Методы-аксессоры get
      */
     QPen getPen() const;
+    qreal getT() const;
+    bool getCharPolygon() const;
 };
 
 #endif // SHAPE_H

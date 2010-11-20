@@ -130,6 +130,10 @@ void AGFGraphicsView::setMy(double value) {
     affine->setMy(value);
     scene()->update();
 }
+void AGFGraphicsView::setMg(double value) {
+    affine->setMg(value);
+    scene()->update();
+}
 void AGFGraphicsView::setAlphaDegree(double value) {
     euclidean->setAlpha(value*M_PI/180);
     scene()->update();
@@ -198,7 +202,7 @@ void AGFGraphicsView::setProjectiveY0(double value) {
     projective->setY0(value);
     scene()->update();
 }
-void AGFGraphicsView::setProjectiveW0(double value) {
+void AGFGraphicsView::setProjectiveW0(int value) {
     projective->setW0(value);
     scene()->update();
 }
