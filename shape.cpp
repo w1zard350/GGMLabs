@@ -152,6 +152,44 @@ void Shape::drawCharPolygon(QPainter* painter) {
     }
 }
 
+qreal Shape::d(qreal x1, qreal y1, qreal x2, qreal y2) {
+    return sqrt(pow(x2 - x1,2) + pow(y2 - y1,2));
+}
+
+void Shape::smooth() {
+    QPointF point;
+    int i = lastPointNumber;
+    if(i >= 0) {
+        qreal x0 = 0, y0 = 0, x1 = 0, y1 = 0, x4 = 0, y4 = 0, x5 = 0, y5 = 0, x = 0, y = 0, alpha1 = 0, alpha2 = 0;
+
+        x5 = shape1Points[i].x();
+        y5 = shape1Points[i].y();
+
+        x0 = x5;
+        y0 = y5;
+
+        x4 = shape1Points[i-1].x();
+        y4 = shape1Points[i-1].y();
+
+        x1 = shape1Points[i+1].x();
+        y1 = shape1Points[i+1].y();
+
+        alpha1 = d(x4, y4, x5, y5);
+        alpha2 = d(x0, y0, x1, y1);
+
+        x = (alpha2/alpha1)*(x5 - x4) + x0;
+        y = (alpha2/alpha1)*(y5 - y4) + y0;
+
+        point.setX(x);
+        point.setY(y);
+
+        shape1Points.replace(i+1, point);
+        lastPointNumber = -1;
+    }
+
+    update();
+}
+
 void Shape::transform() {
     t+=0.1;
 //    qDebug() << t;
@@ -187,6 +225,9 @@ void Shape::mousePressEvent(QGraphicsSceneMouseEvent *event) {
             break;
         }
     }
+
+    if(event->buttons() & (Qt::MidButton | Qt::RightButton)) smooth();
+
     update();
 }
 

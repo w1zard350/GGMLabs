@@ -68,7 +68,6 @@ private slots:
     void reset();
     void setSpeed(int value);
     void setCharacteristics(bool value);
-
 private:
     Ui::MainWindow *ui;
 };
