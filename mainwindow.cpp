@@ -41,11 +41,15 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent), ui(new Ui::MainWin
     grid->setQuarterVisible(4, false);
     grid->setCellNumX(50);
     grid->setCellNumY(60);
+//    grid->setPenGrid(QPen(Qt::gray));
     ui->graphicsView->addItem(grid);
 
     shape = new Shape();
-    shape->setPenCharPolygon(QPen(Qt::yellow, 1));
+    shape->setPen(QPen(Qt::red, 2));
+//    shape->setPenCharPolygon(QPen(Qt::blue, 1));
     ui->graphicsView->addItem(shape);
+//    ui->graphicsView->setBackgroundBrush(QBrush(QColor("#C0C0C0")));
+//    ui->graphicsView->setBackgroundBrush(QBrush(Qt::gray));
 
     setSpeed(ui->speed->value());
 

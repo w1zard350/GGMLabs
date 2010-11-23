@@ -110,7 +110,7 @@ void Shape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWi
     path.moveTo(shape1Points[0].x(), shape1Points[0].y());
     for(int i = 0; i < shape1Points.size()-5; i+=5) {
 //        qDebug() << "i = " << i ;
-        for(t = 0.01; t < 1; t+=0.01) {
+        for(t = 0.01; t < 1; t+=0.001) {
             x0 = shape1Points[i].x();
             x1 = shape1Points[i+1].x();
             x2 = shape1Points[i+2].x();
